@@ -1,0 +1,7 @@
+2025-03-25 13:58:25,239 - INFO - logger.py - [app.py] predictions run on [1, 2, 3] , result : $1000
+2025-03-25 14:13:09,099 - INFO - logger.py - [preprocessing.py] fetching the california dataset from sklearn
+2025-03-25 14:13:09,106 - INFO - logger.py - [preprocessing.py] Mapping the correlation between feature variables and the target variable
+2025-03-25 14:13:09,358 - INFO - logger.py - [preprocessing.py] Preprocessing the data
+2025-03-25 14:16:57,837 - INFO - [preprocessing.py] fetching the california dataset from sklearn
+2025-03-25 14:16:57,843 - INFO - [preprocessing.py] Mapping the correlation between feature variables and the target variable
+2025-03-25 14:16:58,117 - INFO - [preprocessing.py] Preprocessing the data
