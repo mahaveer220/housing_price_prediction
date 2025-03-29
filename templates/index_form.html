@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: block;
+        }
+        button {
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .predict-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+        }
+        .predict-btn:hover {
+            background-color: #218838;
+        }
+        .new-prediction-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+        .new-prediction-btn:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #178d2e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Predict House Price</h1>
+        <form id="prediction-form" action="{{ url_for('predict') }}" method="post">
+            <label>Median Income:</label>
+            <input type="text" name="MedInc" value="{{ request.form['MedInc'] if request.form else '' }}" required />
+
+            <label>House Age:</label>
+            <input type="text" name="HouseAge" value="{{ request.form['HouseAge'] if request.form else '' }}" required />
+
+            <label>Average Rooms per Household:</label>
+            <input type="text" name="AveRooms" value="{{ request.form['AveRooms'] if request.form else '' }}" required />
+
+            <label>Average Bedrooms per Household:</label>
+            <input type="text" name="AveBedrms" value="{{ request.form['AveBedrms'] if request.form else '' }}" required />
+
+            <label>Population:</label>
+            <input type="text" name="Population" value="{{ request.form['Population'] if request.form else '' }}" required />
+
+            <label>Average Household Members:</label>
+            <input type="text" name="AveOccup" value="{{ request.form['AveOccup'] if request.form else '' }}" required />
+
+            <label>Latitude:</label>
+            <input type="text" name="Latitude" value="{{ request.form['Latitude'] if request.form else '' }}" required />
+
+            <label>Longitude:</label>
+            <input type="text" name="Longitude" value="{{ request.form['Longitude'] if request.form else '' }}" required />
+
+            <button type="submit" class="predict-btn">Predict</button>
+        </form>
+
+        <div class="result">
+            <h2>Predicted House Price: {{ prediction_text }}</h2>
+        </div>
+
+        <button class="new-prediction-btn" onclick="resetForm()">New Prediction</button>
+    </div>
+
+    <script>
+        function resetForm() {
+            const currentUrl = window.location.href;
+            const urlParts = currentUrl.split('/');
+            urlParts.pop();
+            const newUrl = urlParts.join('/');
+            window.location.href = newUrl;
+        }
+    </script>
+</body>
+</html>

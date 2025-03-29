@@ -1,25 +1,22 @@
 import numpy as np
 from flask import Flask, request, render_template
 import joblib
-from logger import Logger
-import jsonify
 import json 
-
 
 import os,sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"src")))
-print(sys.path)
-from preprocessing import HousingPreprocessor,ClusterAdder
-
-
-
-
-app = Flask(__name__)
-model_path = "/Users/mahaveer/Desktop/soulai/housing_price_prediction/src/best_model.pkl"
-model = joblib.load(model_path)
+from logger import Logger
 logger = Logger()
 
+from preprocessing import HousingPreprocessor,ClusterAdder
 preprocessor= HousingPreprocessor()
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_DIR = os.path.join(ROOT_DIR,"models")
+MODEL_PATH = os.path.join(MODEL_DIR,"best_model.pkl")
+model = joblib.load(MODEL_PATH)
+
+app = Flask(__name__)
 
 @app.route('/')
 def home():
@@ -27,7 +24,7 @@ def home():
 
 @app.route('/predict', methods=['GET'])
 def render_index():
-    return render_template('index.html')
+    return render_template('index_form.html')
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -44,14 +41,15 @@ def predict():
         
         # Get prediction
         prediction = model.predict(preprocessed_array)
-        output = round(prediction[0], 2)
+        logger.info(f'Predictions run on {input_features}, result: {prediction[0]}')
 
-        logger.info(f'Predictions run on {input_features}, result: {output}')
-        return render_template('index.html', prediction_text=f'${output}')
+        output = round(float(prediction[0]), 2)
+
+        return render_template('index_form.html', prediction_text=f'${output}')
     
     except Exception as e:
         logger.error(f"Error in prediction: {e}")
-        return render_template('index.html', prediction_text="Error: Invalid Input")
+        return render_template('index_form.html', prediction_text="Error: Invalid Input")
     
 @app.route('/predict_json', methods=['GET'])
 def render_json_index():
@@ -64,8 +62,8 @@ def predict_json():
         if request.is_json:
             data = request.get_json()
         else:
-            json_input = request.form.get("json_input")  # Get JSON from form input
-            data = json.loads(json_input)  # Convert JSON string to dictionary
+            json_input = request.form.get("json_input")
+            data = json.loads(json_input)  
 
         input_features = [data[field] for field in [
             "MedInc", "HouseAge", "AveRooms", "AveBedrms",
@@ -80,10 +78,11 @@ def predict_json():
         
         # Get prediction
         prediction = model.predict(preprocessed_array)
-        output = round(prediction[0], 2)
+        logger.info(f'Predictions run on {input_features}, result: {prediction[0]}')
 
-        logger.info(f'Predictions run on {input_features}, result: {output}')
+        output = round(float(prediction[0]), 2)
         return render_template('index_json.html', prediction_text=f'${output}', json_text=json.dumps(data, indent=4))
+    
     except Exception as e:
         logger.error(f"Error in prediction: {e}")
         return render_template('index_json.html', prediction_text="Error: Invalid Input")
