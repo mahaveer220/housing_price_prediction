@@ -86,16 +86,7 @@ class ModelTrainer:
         return {"RMSE": rmse, "MAE": mae, "R2": r2}
 
     def optimize_model(self):
-        # param_grid = {
-        # "Random Forest": {
-        # # "n_estimators": [50, 100, 200],  # Number of trees
-        # # "max_depth": [None, 10, 20, 30],  # Tree depth limit
-        # # "min_samples_split": [2, 5, 10],  # Min samples to split a node
-        # # "min_samples_leaf": [1, 2, 4],  # Min samples in a leaf
-        # # "max_features": ["sqrt", "log2"],  # Number of features to consider per split
-        # # "criterion": ["gini", "entropy"],  # Splitting criterion
-        # # "random_state": [42]  # Ensure reproducibility
-        # }}
+        logger.info(f"Optimizing {self.best_model_name} using RandomizedSearchCV ...")
         param_grid = {
            "XGBoost": {
             "n_estimators": [50, 100, 200, 500],
@@ -107,12 +98,6 @@ class ModelTrainer:
 
         
         if self.best_model_name in param_grid:
-            # grid_search = GridSearchCV(self.best_model, param_grid[self.best_model_name], scoring='neg_mean_squared_error', cv=4)
-            # grid_search.fit(self.X_train, self.y_train)
-            # self.best_model = grid_search.best_estimator_
-            # self.best_params = grid_search.best_params_
-            # logger.info(f"Optimized {self.best_model_name} with Params: {self.best_params}")
-
             random_search = RandomizedSearchCV(
             self.best_model,
             param_distributions=param_grid[self.best_model_name],

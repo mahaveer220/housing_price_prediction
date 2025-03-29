@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"src")))
 from logger import Logger
 logger = Logger()
 
-from preprocessing import HousingPreprocessor,ClusterAdder
+from preprocessor import HousingPreprocessor,ClusterAdder
 preprocessor= HousingPreprocessor()
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -66,8 +66,8 @@ def predict_json():
             data = json.loads(json_input)  
 
         input_features = [data[field] for field in [
-            "MedInc", "HouseAge", "AveRooms", "AveBedrms",
-            "Population", "AveOccup", "Latitude", "Longitude"
+            "Median Income", "House Age", "Average Rooms per Household", "Average Bedrooms per Household",
+            "Population", "Average Household Members", "Latitude", "Longitude"
         ]]
 
         logger.info(input_features)

@@ -71,7 +71,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Predict House Price</h1>
+        <h1>House Price Prediction</h1>
         <form id="prediction-form" action="{{ url_for('predict') }}" method="post">
             <label>Median Income:</label>
             <input type="text" name="MedInc" value="{{ request.form['MedInc'] if request.form else '' }}" required />
@@ -104,7 +104,7 @@
             <h2>Predicted House Price: {{ prediction_text }}</h2>
         </div>
 
-        <button class="new-prediction-btn" onclick="resetForm()">New Prediction</button>
+        <button class="new-prediction-btn" onclick="resetForm()">Back to Home</button>
     </div>
 
     <script>
