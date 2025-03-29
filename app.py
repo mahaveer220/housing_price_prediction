@@ -69,9 +69,6 @@ def predict_json():
             "Median Income", "House Age", "Average Rooms per Household", "Average Bedrooms per Household",
             "Population", "Average Household Members", "Latitude", "Longitude"
         ]]
-
-        logger.info(input_features)
-        
         # Convert input into model-friendly format
         final_features = np.array(input_features)
         preprocessed_array = preprocessor.preprocess_array(final_features) 
