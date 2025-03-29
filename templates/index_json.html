@@ -1,0 +1,255 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict House Price</title>
+</head>
+<body>
+    <h1>House Price Prediction</h1>
+    <form action="/predict_json" method="post">
+        <label for="json_input">Enter JSON Data:</label><br>
+        <textarea id="json_input" name="json_input" rows="6" cols="50">
+{{ json_input | default('{
+    "MedInc": 8.5,
+    "HouseAge": 20,
+    "AveRooms": 5.4,
+    "AveBedrms": 1.2,
+    "Population": 3000,
+    "AveOccup": 3.2,
+    "Latitude": 37.78,
+    "Longitude": -122.42
+}', true) }}
+        </textarea><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction_text %}
+        <pre>Input Json: {{ json_text }}</pre>
+        <h2>Prediction: {{ prediction_text }}</h2>
+    {% endif %}
+
+    <br>
+    <a href="/">Back to Home</a>
+    
+    <button type="button" onclick="window.location.href='/'">Back to Home</button>
+
+    
+</body>
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict House Price</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+        }
+        textarea {
+            width: 100%;
+            font-family: monospace;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            white-space: pre-wrap;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+        .back-links {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>House Price Prediction</h1>
+
+        <form action="/predict_json" method="post">
+            <label for="json_input"><strong>Enter JSON Data:</strong></label><br>
+            <textarea id="json_input" name="json_input" rows="8">
+{{ json_input | default('{
+    "MedInc": 8.5,
+    "HouseAge": 20,
+    "AveRooms": 5.4,
+    "AveBedrms": 1.2,
+    "Population": 3000,
+    "AveOccup": 3.2,
+    "Latitude": 37.78,
+    "Longitude": -122.42
+}', true) }}
+            </textarea><br>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                <h2>Prediction Result</h2>
+                <pre><strong>Input JSON:</strong> {{ json_text }}</pre>
+                <h2>Predicted Price: {{ prediction_text }}</h2>
+            </div>
+        {% endif %}
+
+        <div class="back-links">
+            <a href="/">
+                <button type="button">Back to Home</button>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict House Price</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            padding: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            text-align: left;
+            width: 80%;  /* Increased form width */
+            max-width: 700px; /* Limit max width */
+        }
+        textarea {
+            width: 96%;
+            height: 250px; /* Increased height */
+            font-family: monospace;
+            font-size: 16px; /* Increased font size */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        pre {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            white-space: pre-wrap;
+            font-size: 16px; /* Improved font size */
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+        .back-links {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>House Price Prediction</h1>
+
+        <form action="/predict_json" method="post">
+            <label for="json_input"><strong>Enter JSON Data:</strong></label><br>
+            <textarea id="json_input" name="json_input" rows="10">
+{{ json_input | default('{
+    "MedInc": 8.5,
+    "HouseAge": 20,
+    "AveRooms": 5.4,
+    "AveBedrms": 1.2,
+    "Population": 3000,
+    "AveOccup": 3.2,
+    "Latitude": 37.78,
+    "Longitude": -122.42
+}', true) }}
+            </textarea><br>
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                <h2>Prediction Result</h2>
+                <pre><strong>Input JSON:</strong> {{ json_text }}</pre>
+                <h2>Predicted Price: {{ prediction_text }}</h2>
+            </div>
+        {% endif %}
+
+        <div class="back-links">
+            <a href="/">
+                <button type="button">Back to Home</button>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
