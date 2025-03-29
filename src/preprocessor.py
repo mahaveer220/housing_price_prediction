@@ -135,18 +135,16 @@ class HousingPreprocessor:
 if __name__ == "__main__":
 
     housing = fetch_california_housing(as_frame=True)
-    logger.info("Fetched California housing dataset.")
     data = housing.frame
 
     X = data.drop('MedHouseVal', axis=1)
     y = data['MedHouseVal']
 
-    logger.info("Splitting the dataset into train and test sets.")
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
     
     preprocessor = HousingPreprocessor()
 
-    if not preprocessor.load_pipeline():
+    if not preprocessor.load_pipeline() or not os.path.exists(preprocessor.x_train_path):
         X_train, X_test, y_train, y_test = preprocessor.create_pipeline_and_process_data(X_train, X_test, y_train, y_test)
 
         joblib.dump(preprocessor.pipeline, preprocessor.pipeline_path)
