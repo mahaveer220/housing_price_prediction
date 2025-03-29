@@ -111,7 +111,7 @@
         function resetForm() {
             const currentUrl = window.location.href;
             const urlParts = currentUrl.split('/');
-            urlParts.pop(); // Remove the last part of the URL
+            urlParts.pop();
             const newUrl = urlParts.join('/');
             window.location.href = newUrl;
         }
