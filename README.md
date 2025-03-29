@@ -68,7 +68,7 @@ pip install -r requirements.txt
 - The best model is selected based on RMSE, MAE, and R2 score.
 - Hyperparameter tuning is performed using `RandomizedSearchCV` for optimization for the best model selected.
 - The best model fit to data and is saved in `models/best_model.pkl`.
-- The log_file under `logs` directory also shows the preocedure of a sample run. 
+- The log_file under `logs` directory also shows the log of a sample run. 
 
 ## App deployment and Usage
 - The trained model is deployed using a Flask API (`app.py`).
